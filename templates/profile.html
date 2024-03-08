@@ -1,0 +1,128 @@
+{% extends "layout.html" %}
+{% block head %}
+{% endblock %}
+
+{% block title %}
+Profile
+{% endblock %}
+
+
+{% block main %}
+<ul class="list-group list-group-flush">
+    <li class="list-group-item">
+        <h4>{{name}}</h4>
+    </li>
+    <li class="list-group-item">
+        <h4>{{email}}</h4>
+    </li>
+    <li class="list-group-item">
+        <h4>Upcoming lessons:</h4>
+        {% if len_upcoming <= 5 or view_all_upcoming == True %}
+        {% for i in range(len_upcoming) %}
+        <ul>
+            {{upcoming_lessons[i][4]}}
+            <text> from</text>
+            {{upcoming_lessons[i][5][0:5]}}
+            <text> to</text>
+            {{upcoming_lessons[i][7][0:5]}}
+            {% if upcoming_lessons[i][9] == True %}
+            <text style="color:green;">CONFIRMED</text>
+            {% if admin == True %}
+            <form action="/profile/{{name}}" method="post">
+                <button type="Submit" class="btn btn-outline-danger"
+                        name="cancel" value={{upcoming_lessons[i][10]}}>Cancel
+                </button>
+            </form>
+            {% endif %}
+            {% else %}
+            <text style="color:red;">PENDING</text>
+            {% if admin == True %}
+            <form action="/profile/{{name}}" method="post">
+                <button type="Submit" class="btn btn-outline-success"
+                        name="confirm" value={{upcoming_lessons[i][10]}}>
+                    Confirm
+                </button>
+                <button type="Submit" class="btn btn-outline-danger"
+                        name="cancel" value={{upcoming_lessons[i][10]}}>Cancel
+                </button>
+            </form>
+            {% endif %}
+            {% endif %}
+        </ul>
+        {% endfor %}
+
+        {% else %}
+        {% for i in range(5) %}
+
+        <ul>
+            {{upcoming_lessons[i][4]}}
+            <text> from</text>
+            {{upcoming_lessons[i][5][0:5]}}
+            <text> to</text>
+            {{upcoming_lessons[i][7][0:5]}}
+            {% if upcoming_lessons[i][9] == True %}
+            <text style="color:green;">CONFIRMED</text>
+            {% if admin == True %}
+            <form action="/profile/{{name}}" method="post">
+                <button type="Submit" class="btn btn-outline-danger"
+                        name="cancel" value={{upcoming_lessons[i][10]}}>Cancel
+                </button>
+            </form>
+            {% endif %}
+            {% else %}
+            <text style="color:red;">PENDING</text>
+            {% if admin == True %}
+            <form action="/profile/{{name}}" method="post">
+                <button type="Submit" class="btn btn-outline-success"
+                        name="confirm" value="True">Confirm
+                </button>
+                <button type="Submit" class="btn btn-outline-danger"
+                        name="cancel" value="True">Cancel
+                </button>
+            </form>
+            {% endif %}
+            {% endif %}
+
+        </ul>
+
+        {% endfor %}
+        <form action="/profile/{{name}}" method="post">
+            <button type="Submit" class="view-all" name="view_upcoming" ,
+                    value="True">View all
+            </button>
+        </form>
+        {% endif %}
+    </li>
+    <li class="list-group-item">
+        <h4>Previous lessons:</h4>
+        {% if len_previous <= 5 or view_all_previous == True %}
+        {% for i in range(len_previous) %}
+        <ul>
+            {{previous_lessons[i][4]}}
+            <text> from</text>
+            {{previous_lessons[i][5][0:5]}}
+            <text> to</text>
+            {{previous_lessons[i][7][0:5]}}
+        </ul>
+        {% endfor %}
+
+        {% else %}
+        {% for i in range(len_previous - 5, len_previous) %}
+        <ul>
+            {{previous_lessons[i][4]}}
+            <text> from</text>
+            {{previous_lessons[i][5][0:5]}}
+            <text> to</text>
+            {{previous_lessons[i][7][0:5]}}
+        </ul>
+        {% endfor %}
+        <form action="/profile/{{name}}" method="post">
+            <button type="Submit" class="view-all" name="view_prev" ,
+                    value="True">View all
+            </button>
+        </form>
+        {% endif %}
+    </li>
+
+</ul>
+{% endblock %}

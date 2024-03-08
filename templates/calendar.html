@@ -1,0 +1,120 @@
+{% extends "layout.html" %}
+{% block head %}
+
+<!-- https://fullcalendar.io/docs/v6/ -->
+<script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.5/index.global.min.js'></script>
+
+<!-- calendar init -->
+<script>
+
+      document.addEventListener('DOMContentLoaded', function() {
+        var calendarEl = document.getElementById('calendar');
+
+        var calendar = new FullCalendar.Calendar(calendarEl, {
+            height: "auto",
+            validRange: {
+                start: '{{today}}',
+                end: '{{three_months}}'
+                },
+            navLinks: true,
+            headerToolbar: {
+            left: 'prev,next today',
+            center: 'title',
+            right: 'dayGridMonth, dayGridDay'
+            },
+            events: [
+            {% for i in range(events | length) %}
+            {
+                'id': 'i',
+                'title': '{{events[i][2]}}',
+                'start': '{{events[i][6]}}',
+                'end': '{{events[i][8]}}',
+                <!-- Changes pending event colors to red -->
+                {% if events[i][9] == False %}
+                    'color': 'red',
+                {% else %}
+                    'color': 'green',
+                {% endif %}
+                {% if events[i][2] == username or username == "admin" %}
+                    'url': '/profile/{{events[i][2]}}',
+                {% endif %}
+            },
+            {% endfor %}
+            ],
+            eventTimeFormat: {
+            hour: '2-digit',
+            minute: '2-digit',
+            meridiem: false,
+            hour12: false
+            }
+        });
+
+        calendar.render();
+      });
+
+
+
+
+
+
+
+</script>
+{% endblock %}
+
+{% block title %}
+Calendar
+{% endblock %}
+
+
+{% block main %}
+<form action="/calendar" method="post">
+    <div class="container-fluid">
+        <h5>Schedule a lesson</h5>
+        <div class="row justify-content-center">
+            <div class="col-lg-3 col-sm-6">
+                <label for="Date">Date</label>
+                <input id="Date" name="date" class="form-control" type="date"
+                       min="{{today}}" max="{{three_months}}" required/>
+                <span id="DateSelected"></span>
+            </div>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-lg-1 col-sm-2">
+                <label for="startLesson">Start Time</label>
+                <select id="startLesson" name="start_hour" class="form-select"
+                        required>
+                    {% for i in range(7, 22) %}
+                    <option value={{'%02d'%i}}:>{{'%02d'%i}}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="col-lg-1 col-sm-2">
+                <label for="startMinute"></label>
+                <select id="startMinute" name="start_minute"
+                        class="form-select" required>
+                    {% for i in range(0, 60, 15) %}
+                    <option value={{'%02d'%i}}:00>{{'%02d'%i}}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="col-lg-2 col-sm-4">
+                <label for="durationLesson">Duration of Lesson</label>
+                <select id="durationLesson" name="duration" class="form-select"
+                        required>
+                    <option value="30">30 Minutes</option>
+                    <option value="45">45 Minutes</option>
+                    <option selected value="60">1 Hour</option>
+                </select>
+            </div>
+        </div>
+
+    </div>
+    <button id="booking-submit" class="btn btn-success" type="submit"
+            onclick="disableButton(this)">Submit</button>
+</form>
+
+<div class="container-md">
+    <div id='calendar'></div>
+</div>
+
+{% endblock %}

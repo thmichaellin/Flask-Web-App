@@ -1,0 +1,98 @@
+body
+{
+background-image: url("../static/images/background.png");
+background-size: 100%;
+background-attachment: fixed;
+}
+
+/* Company logo */
+.navbar-brand
+{
+font-size: 500%;
+font-family: 'MADE GoodTime Script', sans-serif;
+font-style: normal;
+font-weight: 700;
+color: #014D4E;
+}
+
+.nav-item
+{
+font-size: 200%
+}
+
+.container-md
+{
+width: 100%;
+background-color: #B2D3C2;
+}
+
+.list-group
+{
+display: inline-block;
+width: 78%;
+}
+
+@media only screen and (min-device-width: 1200px) {
+    .list-group
+    {
+       width: 26%;
+    }
+}
+
+.list-group-item
+{
+background-color: #B2D3C2;
+text-align: left;
+}
+
+/* Calendar grid formatting */
+:root
+{
+  --fc-border-color: black;
+  --fc-button-text-color: white;
+  --fc-event-text-color: black;
+}
+
+/* Format things in the grid (dates etc.)*/
+a
+{
+color: black; /* Text color */
+}
+
+/* Text width for non-mobile devices */
+@media only screen and (min-device-width: 1200px) {
+    #welcome-text
+    {
+       width: 50%;
+    }
+}
+
+.container-fluid > p
+{
+width: 75%;
+display: inline-block;
+font-weight: 500;
+}
+
+
+#register
+{
+margin-top: 10px;
+}
+
+text.email
+{
+float: right;
+}
+
+#booking-submit
+{
+margin-top: 10px;
+margin-bottom: 10px;
+}
+
+.view-all
+{
+margin-top: 10px;
+margin-left: 7%;
+}
