@@ -1,10 +1,10 @@
 # Project Title:<br> Meacham Lesson Management App
 ## Name: Michael Lin
 # Screenshots:<br>
-<img src="C:\Users\thmic\OneDrive\Documents\GitHub\project-thmichaellin\static\images\Screenshot1.png" width="250"/>
-<img src="C:\Users\thmic\OneDrive\Documents\GitHub\project-thmichaellin\static\images\Screenshot2.png" width="250"/><br>
-<img src="C:\Users\thmic\OneDrive\Documents\GitHub\project-thmichaellin\static\images\Screenshot3.png" width="250"/>
-<img src="C:\Users\thmic\OneDrive\Documents\GitHub\project-thmichaellin\static\images\Screenshot4.png" width="250"/>
+<img src="\static\images\Screenshot1.png" width="250"/>
+<img src="\static\images\Screenshot2.png" width="250"/><br>
+<img src="\static\images\Screenshot3.png" width="250"/>
+<img src="\static\images\Screenshot4.png" width="250"/>
 
 # Description:
 This project is a Flask application that allows users to view a
